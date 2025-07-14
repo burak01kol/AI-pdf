@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Gelişmiş PDF AI Sistemi</title>
+    <link rel="stylesheet" href="css/index.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Gelişmiş PDF AI Sistemi</h1>
+            <p>Google Flan-T5 Large ile güçlendirilmiş akıllı PDF soru-cevap sistemi</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Sistem Durumu -->
+            <div class="system-status">
+                <h4>🔧 Sistem Durumu</h4>
+                <div class="status-indicator">
+                    <div class="status-dot status-inactive" id="models-status"></div>
+                    <span><strong>AI Modelleri</strong></span>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot status-inactive" id="pdf-status"></div>
+                    <span><strong>PDF Analizi</strong></span>
+                </div>
+            </div>
+
+            <!-- Başarı Bildirimi -->
+            <div class="success-notification" id="success-notification">
+                ✅ İşlem başarıyla tamamlandı!
+            </div>
+
+            <!-- Adım 1: Modelleri Yükle -->
+            <div class="step-container" id="step1">
+                <div class="step-header">
+                    <div class="step-number" id="step1-number">1</div>
+                    <div class="step-title">🧠 Güçlü AI Modellerini Yükle</div>
+                </div>
+                <div class="step-description">
+                    Yeni nesil Google Flan-T5 Large modeli ve çok dilli embedding sistemi yüklenecek. 
+                    Bu modeller daha akıllı, daha doğru ve Türkçe'de çok daha başarılı cevaplar üretir.
+                    <br><br>
+                    <strong>📊 Yüklenecek Modeller:</strong>
+                    <br>• Google Flan-T5 Large (780M parametre)
+                    <br>• Çok Dilli DistilUSE Embedding
+                    <br>• Türkçe optimizasyonu
+                </div>
+                <button class="btn btn-large" id="load-models-btn" onclick="loadModels()">
+                    📥 Güçlü AI Modellerini Yükle
+                </button>
+                <div id="models-status-message"></div>
+                <div class="loading" id="models-loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Güçlü AI modelleri indiriliyor ve yükleniyor...<br>Bu işlem 2-5 dakika sürebilir.</div>
+                </div>
+            </div>
+
+            <!-- Adım 2: PDF Yükle -->
+            <div class="step-container" id="step2">
+                <div class="step-header">
+                    <div class="step-number" id="step2-number">2</div>
+                    <div class="step-title">📄 PDF Dosyasını Yükle ve Analiz Et</div>
+                </div>
+                <div class="step-description">
+                    PDF'iniz akıllı algoritma ile analiz edilecek. Sistem sayfa sayfa okuyacak, 
+                    metni anlamlı parçalara böldükten sonra her parçayı vektörel olarak indeksleyecek.
+                    <br><br>
+                    <strong>⚡ Gelişmiş İşlemler:</strong>
+                    <br>• Akıllı paragraf bölme
+                    <br>• Çok dilli vektörizasyon  
+                    <br>• Güvenli dosya işleme
+                </div>
+                <div class="file-upload">
+                    <input type="file" id="pdf-file" accept=".pdf">
+                    <label for="pdf-file" class="file-upload-label">
+                        📁 PDF Dosyası Seçin (Maks: 50MB)
+                    </label>
+                </div>
+                <br>
+                <button class="btn btn-large" id="upload-btn" onclick="uploadPDF()" disabled>
+                    🔍 PDF'i Analiz Et ve İndeksle
+                </button>
+                <div id="upload-status-message"></div>
+                <div class="loading" id="upload-loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">PDF analiz ediliyor ve akıllı indeksleme yapılıyor...</div>
+                </div>
+            </div>
+
+            <!-- Adım 3: Soru Sor -->
+            <div class="step-container" id="step3">
+                <div class="step-header">
+                    <div class="step-number" id="step3-number">3</div>
+                    <div class="step-title">❓ PDF Hakkında Akıllı Sorular Sor</div>
+                </div>
+                <div class="question-section">
+                    <div class="step-description">
+                        Google Flan-T5 Large modeli PDF'inizin içeriğini derinlemesine analiz ederek 
+                        sorularınıza detaylı, anlamlı ve kaynak belirtmeli cevaplar verecek.
+                    </div>
+                    <textarea 
+                        class="question-input" 
+                        id="question-input" 
+                        placeholder="PDF'inizle ilgili detaylı sorunuzu buraya yazın..
+
+Örnek: 'Bu belgede bahsedilen en önemli sonuçlar ve öneriler nelerdir? Detaylarıyla açıklayın.'"
+                        disabled
+                    ></textarea>
+                    <button class="btn btn-large" id="ask-btn" onclick="askQuestion()" disabled>
+                        🤔 Akıllı Analiz Yap ve Cevapla
+                    </button>
+                    
+                    <div class="example-questions">
+                        <h4>💡 Gelişmiş Analiz Soruları:</h4>
+                        <button class="example-btn" onclick="setQuestion('Belgenin yazarı kimdir ve hangi tarihte hazırlanmıştır? Amaçları nelerdir?')">
+                            Yazar, tarih ve amaç bilgisi
+                        </button>
+                        <button class="example-btn" onclick="setQuestion('Bu belgede en çok vurgulanan ana konu nedir? Detaylarıyla açıklayın.')">
+                            En önemli konu analizi
+                        </button>
+                        <button class="example-btn" onclick="setQuestion('Projede hangi teknolojiler, yöntemler veya araçlar kullanılmıştır?')">
+                            Teknoloji ve yöntem analizi
+                        </button>
+                        <button class="example-btn" onclick="setQuestion('Yazarın görüşlerine göre en önemli problem veya çözüm önerisi nedir?')">
+                            Problem ve çözüm analizi
+                        </button>
+                        <button class="example-btn" onclick="setQuestion('Bu belgede sunulan bulgular, sonuçlar ve öneriler nelerdir?')">
+                            Bulgular ve öneriler
+                        </button>
+                        <button class="example-btn" onclick="setQuestion('Belgedeki sayısal veriler, istatistikler veya ölçümler nelerdir?')">
+                            Sayısal veri analizi
+                        </button>
+                    </div>
+                </div>
+
+                <div class="answer-card" id="answer-section" style="display: none;">
+                    <div class="answer-header">
+                        <h3>🎯 AI Analiz Sonucu</h3>
+                        <div class="query-display" id="query-display"></div>
+                    </div>
+                    <div class="answer-text" id="answer-text"></div>
+                    <div class="source-info-card" id="source-info"></div>
+                </div>
+
+                <div class="loading" id="question-loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Google Flan-T5 Large ile detaylı analiz yapılıyor...<br>Lütfen bekleyin.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
